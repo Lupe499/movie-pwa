@@ -1,7 +1,6 @@
-const CACHE_NAME = 'moviedb_cache_v1'
+const CACHE_NAME = 'moviedb_cache_v2'
 var urlsToCache = [
-    '/',
-    '/static/js/*'
+    'index.html'
   ];
 
 self.addEventListener('install', function(event) {

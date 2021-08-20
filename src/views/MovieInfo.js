@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import SearchBar from '../components/SearchBar';
-import Localbase from 'localbase'
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import'./MovieInfo.css';
 
 export default function MovieInfo() {
-
     var url = new URLSearchParams(window.location.search)
     var [movie, setMovie] = useState([])
 
@@ -27,7 +29,6 @@ export default function MovieInfo() {
               });
         }, [setMovie]
         ) 
-        console.log(movie);
 
 
 
@@ -72,24 +73,31 @@ export default function MovieInfo() {
             };
             request.onsuccess = function(event) {
                 var db = request.result;
-               
-                var customerObjectStore = db.transaction("movie-votes", "readwrite").objectStore("movie-votes");
+                
+                var ratingObjectStore = db.transaction("movie-votes", "readwrite").objectStore("movie-votes");
                 rating.forEach(function(movie) {
-                    customerObjectStore.put(movie)
+                    ratingObjectStore.put(movie)
+                    console.log(rating);
                 });
+                var getData = ratingObjectStore.get(url.get("id"));
+                getData.onsuccess = function () {
+                    if (!getData.result) return
+                    handleResult(getData.result.vote)
+                };
+                  
             };
-            
-
+            function handleResult(number) {
+                document.querySelector(".voteValue").value = number
+                setValue(number);
+            }
+            var [value, setValue] = useState(0);
+              
         
-        
-        
-        
-
-
-
     return (
         <>
-            <SearchBar />
+            <form className="searchForm" action="">
+                <a href="/" className="title">MovieDB</a>
+            </form>
             <div className="movieInfo">
                 <h1>{movie.Title}</h1>
                 <img src={movie.Poster} alt="" />
@@ -115,9 +123,16 @@ export default function MovieInfo() {
                                 </div>
                             )
                         })}
-                        <form onSubmit={Vote} action="">
-                            <input className="voteValue" min="1" max="5" type="number" />
-                            <button className="voteBtn"type="submit">Rate</button>
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                            <Typography component="legend">Your Rating</Typography>
+                            <Rating name="read-only" value={value} readOnly />
+                        </Box>
+                        <form className="ratingForm" onSubmit={Vote} action="">
+                            <div>
+                                <input className="voteValue" min="1" max="5" type="number" />
+                                <button className="voteBtn"type="submit">Rate</button>
+                            </div>
+
                         </form>
                     </div>
 

@@ -38,7 +38,7 @@ export default function SearchSite() {
                 {search?.Search?.map(result => {
                     return (
                         
-                            <a key={result.imdbID} className="movieLink" href={"./movieinfo/?id=" + result.imdbID}>
+                            <a key={result.imdbID} className="movieLink" href={"/movieinfo?id=" + result.imdbID}>
                                 <h1 key={result.Title}>{result.Title}</h1>
                                 <img key={result.Poster} src={result.Poster} alt="poster" />
                             </a>

@@ -1,0 +1,18 @@
+.ratingForm{
+  display: grid;
+  justify-content: center;
+}
+.voteBtn{
+  background-color: #00FF80;
+  color: white;
+  border: none;
+  padding: 1em 1.5em;
+  border-radius: 0px 10px 10px 0;
+}
+.voteValue{
+  background-color:rgb(48, 47, 49);
+  color: white;
+  border: 5px solid #00FF80;
+  padding: 0.63em 1.5em;
+  border-radius: 10px 0px 0px 10px;
+}

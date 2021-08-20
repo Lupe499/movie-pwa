@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  display: flex;
+  background-color: rgb(48, 47, 49);
+  color: white;
 }
 .wrapper {
   width: 100%;
@@ -13,9 +14,9 @@ h1{
 }
 .movieLink{
   text-decoration: none;
-  color: black;
+  color: white;
   padding-bottom: 1em;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
   display: grid;
   width: 100%;
   justify-items: center;
@@ -49,3 +50,13 @@ h2{
   display: flex;
   justify-content: space-between;
 }
+fieldset {
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+fieldset .MuiTypography-body1 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
